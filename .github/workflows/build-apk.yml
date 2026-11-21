@@ -23,14 +23,16 @@ jobs:
       - name: Configurar Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.9'
+             - name: Compilar aplicativo
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
 
-      - name: Preparar Android SDK
+      - name: Instalar componentes Android
         run: |
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          yes | sdkmanager --licenses
           sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
-
+      - name: Instalar componentes Android
+        run: |
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
       - name: Compilar aplicativo
         run: gradle assembleDebug
 
